@@ -10,7 +10,7 @@ const Footer = () => {
       </p>
       <div className="flex gap-7 items-center text-base">
         <a
-          href="https://github.com/your-profile"
+          href="https://github.com/dhruvin2968"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-1 hover:text-emerald-400 transition font-medium"

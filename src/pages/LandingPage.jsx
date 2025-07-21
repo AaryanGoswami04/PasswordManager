@@ -6,7 +6,7 @@ const LandingPage = () => {
   <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white flex flex-col items-center justify-center px-4">
     <div className="w-full max-w-2xl mx-auto p-8 rounded-3xl backdrop-blur-md bg-white/5 border border-emerald-400/20 shadow-2xl flex flex-col items-center">
       <h1 className="text-5xl md:text-7xl font-extrabold mb-6 text-center tracking-tight bg-gradient-to-r from-emerald-400 via-teal-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-lg animate-gradient-x">
-        🔐 SecurePass
+        🔐 VaultX
       </h1>
       <p className="text-lg md:text-2xl mb-10 text-emerald-200 text-center font-medium max-w-xl">
         Your digital vault to store and generate uncrackable passwords.<br />
@@ -27,7 +27,7 @@ const LandingPage = () => {
       </div>
     </div>
     <footer className="mt-14 text-sm text-gray-500 text-center drop-shadow-sm">
-      Made with <span className="inline-block animate-pulse">🔒</span> by your trusted Password Bro
+      Made with <span className="inline-block animate-pulse">🔒</span> by your Dhruvin
     </footer>
   </div>
 );
