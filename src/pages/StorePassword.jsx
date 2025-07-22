@@ -1,8 +1,19 @@
 import React, { useState ,useEffect} from 'react';
 import { db, auth, collection, addDoc } from '../firebase/config'; // adjust path if needed
 import { onAuthStateChanged } from 'firebase/auth';
+import CryptoJS from "crypto-js";
+
+
 
 const StorePassword = () => {
+ 
+  const [USER_SECRET_KEY,setUSER_SECRET_KEY] = useState(() => {
+    // Initialize state lazily from localStorage, fallback to null
+    return localStorage.getItem('USER_SECRET_KEY') || "TOPSECRET";
+  });
+  const encryptPassword = (plainTextPassword, secretKey) => {
+  return CryptoJS.AES.encrypt(plainTextPassword, secretKey).toString();
+  };
   const [formData, setFormData] = useState({
     site: '',
     username: '',
@@ -17,6 +28,7 @@ const StorePassword = () => {
   useEffect(() => {
     const handleStorageChange = () => {
       setUserID(localStorage.getItem('userID') || null);
+      setUSER_SECRET_KEY(localStorage.getItem('USER_SECRET_KEY') || "TOPSECRET");
     };
     window.addEventListener('storage', handleStorageChange);
     return () => window.removeEventListener('storage', handleStorageChange);
@@ -48,6 +60,7 @@ const StorePassword = () => {
     try {
       await addDoc(collection(db, "Users"), {
         ...formData,
+        password:encryptPassword(formData.password, USER_SECRET_KEY),
         userID: userID,
       });
       alert("Password saved securely 🔐");
