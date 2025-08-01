@@ -13,13 +13,13 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/generate-password" element={<PasswordGenerator />} />
+        <Route  path="/generate-password" element={<PasswordGenerator />} />
         <Route path="/store-password" element={<StorePassword />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route  path="/dashboard" element={<Dashboard />} />
       </Routes>
       <Footer/>
     </Router>
-  );
+  ); 
 }
 
 export default App;

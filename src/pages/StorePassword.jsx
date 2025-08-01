@@ -9,7 +9,7 @@ const StorePassword = () => {
  
   const [USER_SECRET_KEY,setUSER_SECRET_KEY] = useState(() => {
     // Initialize state lazily from localStorage, fallback to null
-    return localStorage.getItem('USER_SECRET_KEY') || "TOPSECRET";
+    return localStorage.getItem('secretKey') || "TOPSECRET";
   });
   const encryptPassword = (plainTextPassword, secretKey) => {
   return CryptoJS.AES.encrypt(plainTextPassword, secretKey).toString();
@@ -28,7 +28,7 @@ const StorePassword = () => {
   useEffect(() => {
     const handleStorageChange = () => {
       setUserID(localStorage.getItem('userID') || null);
-      setUSER_SECRET_KEY(localStorage.getItem('USER_SECRET_KEY') || "TOPSECRET");
+      setUSER_SECRET_KEY(localStorage.getItem('secretKey') || "TOPSECRET");
     };
     window.addEventListener('storage', handleStorageChange);
     return () => window.removeEventListener('storage', handleStorageChange);
@@ -72,7 +72,7 @@ const StorePassword = () => {
   };
 
   return (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black flex items-center justify-center px-6">
+  <div className="min-h-screen bg-gradient-to-t from-black via-slate-800 to-black flex items-center justify-center px-6">
     <div className="bg-white/10 backdrop-blur-2xl rounded-3xl shadow-2xl border border-emerald-400/20 max-w-md w-full p-10 sm:p-12">
       <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-7 text-emerald-300 drop-shadow tracking-tight">
         <span className="text-2xl align-middle pr-2">🔒</span>

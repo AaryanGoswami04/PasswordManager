@@ -49,100 +49,120 @@ const PasswordGenerator = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 1200);
   };
-  return (
-    <div className=" max-w-xl mx-auto p-8 mt-12 bg-white rounded-2xl shadow-2xl ring-1 ring-indigo-100 relative">
-      {/* Decorative Gradient Bubble */}
-      <div className="absolute -z-10 right-[-40px] top-[-40px] blur-2xl w-40 h-40 rounded-full bg-gradient-to-br from-indigo-200/40 to-indigo-100/0"></div>
-      
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-8 text-center text-indigo-700 flex justify-center items-center gap-2">
-        <FiKey className="inline text-indigo-400 text-3xl" /> 
-        Custom Password Generator
-      </h2>
-      
-      <div className="space-y-8">
-        <div>
-          <label className="block font-semibold mb-1 text-indigo-800">Password Length</label>
-          <input
-            type="number"
-            min="4"
-            max="100"
-            value={length}
-            onChange={e => setLength(parseInt(e.target.value))}
-            className="w-full border border-indigo-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 p-3 rounded-lg transition outline-none"
-          />
-        </div>
+ 
 
-        <div className="grid grid-cols-2 gap-6">
-          <div>
-            <label className="block font-semibold mb-1 text-indigo-800">Lowercase Letters</label>
+return (
+  <div className='flex items-center justify-center min-h-screen bg-gradient-to-t from-black via-slate-800 to-black font-sans p-4'>
+    <div className="w-full max-w-xl mx-auto p-8 bg-gray-800 text-gray-200 rounded-3xl shadow-2xl relative border border-gray-700 overflow-hidden">
+      {/* Decorative Blur Background */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <div className="w-64 h-64 bg-green-500 rounded-full mix-blend-multiply filter blur-3xl absolute top-0 left-0 animate-blob"></div>
+        <div className="w-64 h-64 bg-green-500 rounded-full mix-blend-multiply filter blur-3xl absolute bottom-0 right-0 animate-blob animation-delay-2000"></div>
+      </div>
+      
+      {/* Content Container */}
+      <div className="relative z-10 space-y-10">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-green-400 drop-shadow-lg flex items-center justify-center gap-3">
+          <FiKey className="inline text-purple-300 text-4xl"/> 
+          Secure Password Generator
+        </h2>
+        
+        <div className="space-y-6">
+          <div className="flex flex-col">
+            <label htmlFor="password-length" className="text-sm font-semibold mb-2 text-indigo-200">Password Length</label>
             <input
+              id="password-length"
               type="number"
-              min="0"
-              max="50"
-              value={lowerCount}
-              onChange={e => setLowerCount(parseInt(e.target.value))}
-              className="w-full border border-indigo-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 p-3 rounded-lg transition outline-none"
+              min="4"
+              max="100"
+              value={length}
+              onChange={e => setLength(parseInt(e.target.value))}
+              className="w-full bg-gray-700 text-white border border-gray-600 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-700 p-4 rounded-xl transition duration-300 outline-none placeholder-gray-400"
             />
           </div>
-          <div>
-            <label className="block font-semibold mb-1 text-indigo-800">Uppercase Letters</label>
-            <input
-              type="number"
-              min="0"
-              max="50"
-              value={upperCount}
-              onChange={e => setUpperCount(parseInt(e.target.value))}
-              className="w-full border border-indigo-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 p-3 rounded-lg transition outline-none"
-            />
-          </div>
-          <div>
-            <label className="block font-semibold mb-1 text-indigo-800">Digits</label>
-            <input
-              type="number"
-              min="0"
-              max="50"
-              value={digitCount}
-              onChange={e => setDigitCount(parseInt(e.target.value))}
-              className="w-full border border-indigo-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 p-3 rounded-lg transition outline-none"
-            />
-          </div>
-          <div>
-            <label className="block font-semibold mb-1 text-indigo-800">Special Characters</label>
-            <input
-              type="number"
-              min="0"
-              max="50"
-              value={specialCount}
-              onChange={e => setSpecialCount(parseInt(e.target.value))}
-              className="w-full border border-indigo-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 p-3 rounded-lg transition outline-none"
-            />
-          </div>
-        </div>
 
-        <button
-          onClick={generatePassword}
-          className="w-full mt-1 flex justify-center items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 text-white font-bold py-3 rounded-lg transition shadow-md active:scale-95 duration-150"
-        >
-          <FiKey className="text-xl" />
-          Generate Password
-        </button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="flex flex-col">
+              <label htmlFor="lowercase-count" className="text-sm font-semibold mb-2 text-indigo-200">Lowercase Letters</label>
+              <input
+                id="lowercase-count"
+                type="number"
+                min="0"
+                max="50"
+                value={lowerCount}
+                onChange={e => setLowerCount(parseInt(e.target.value))}
+                className="w-full bg-gray-700 text-white border border-gray-600 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-700 p-4 rounded-xl transition duration-300 outline-none placeholder-gray-400"
+              />
+            </div>
+            
+            <div className="flex flex-col">
+              <label htmlFor="uppercase-count" className="text-sm font-semibold mb-2 text-indigo-200">Uppercase Letters</label>
+              <input
+                id="uppercase-count"
+                type="number"
+                min="0"
+                max="50"
+                value={upperCount}
+                onChange={e => setUpperCount(parseInt(e.target.value))}
+                className="w-full bg-gray-700 text-white border border-gray-600 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-700 p-4 rounded-xl transition duration-300 outline-none placeholder-gray-400"
+              />
+            </div>
+            
+            <div className="flex flex-col">
+              <label htmlFor="digits-count" className="text-sm font-semibold mb-2 text-indigo-200">Digits</label>
+              <input
+                id="digits-count"
+                type="number"
+                min="0"
+                max="50"
+                value={digitCount}
+                onChange={e => setDigitCount(parseInt(e.target.value))}
+                className="w-full bg-gray-700 text-white border border-gray-600 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-700 p-4 rounded-xl transition duration-300 outline-none placeholder-gray-400"
+              />
+            </div>
+            
+            <div className="flex flex-col">
+              <label htmlFor="special-count" className="text-sm font-semibold mb-2 text-indigo-200">Special Characters</label>
+              <input
+                id="special-count"
+                type="number"
+                min="0"
+                max="50"
+                value={specialCount}
+                onChange={e => setSpecialCount(parseInt(e.target.value))}
+                className="w-full bg-gray-700 text-white border border-gray-600 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-700 p-4 rounded-xl transition duration-300 outline-none placeholder-gray-400"
+              />
+            </div>
+          </div>
+
+          <button
+            onClick={generatePassword}
+            className="w-full mt-4 flex items-center justify-center gap-3 bg-gradient-to-r from-green-600 to-green-300 hover:from-green-700 hover:to-green-9  00 text-black  font-bold py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95"
+          >
+            <FiKey className="text-2xl" />
+            Generate Password
+          </button>
+        </div>
 
         {password && (
-          <div className="mt-8 relative bg-gradient-to-tr from-indigo-50 via-white to-indigo-100 p-4 rounded-xl text-center shadow font-mono text-xl break-all flex flex-col items-center animate-fadeIn">
-            <span>{password}</span>
+          <div className="mt-8 relative bg-gray-700 p-6 rounded-2xl text-center shadow-inner border border-gray-600 animate-fadeIn">
+            <span className="font-mono text-2xl md:text-3xl font-light text-white break-all">{password}</span>
             <button
               onClick={handleCopy}
-              className="absolute right-4 top-3 inline-flex items-center text-indigo-400 hover:text-indigo-700 transition"
+              className="absolute top-4 right-4 text-gray-400 hover:text-indigo-400 transition-colors duration-200"
               title="Copy to clipboard"
             >
-              <FiCopy className="text-xl" />
+              <FiCopy className="text-2xl" />
             </button>
-            {copied && <span className="text-green-600 text-xs mt-2 animate-fadeIn">Copied!</span>}
+            {copied && (
+              <span className="absolute bottom-3 left-1/2 -translate-x-1/2 text-green-400 text-xs mt-2 animate-pulse-fade-in">
+                Copied!
+              </span>
+            )}
           </div>
         )}
       </div>
     </div>
-  );
-};
-
+  </div>
+);};
 export default PasswordGenerator;
