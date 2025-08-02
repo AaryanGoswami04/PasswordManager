@@ -2,13 +2,19 @@ import React, { useState ,useEffect} from 'react';
 import { db, auth, collection, addDoc } from '../firebase/config'; // adjust path if needed
 import { onAuthStateChanged } from 'firebase/auth';
 import CryptoJS from "crypto-js";
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 const StorePassword = () => {
- 
+    const navigate = useNavigate();
+  useEffect(() => {
+    const userID = localStorage.getItem("userID");
+    if (!userID) {
+      navigate("/");
+    }
+  }, [navigate]);
   const [USER_SECRET_KEY,setUSER_SECRET_KEY] = useState(() => {
-    // Initialize state lazily from localStorage, fallback to null
     return localStorage.getItem('secretKey') || "TOPSECRET";
   });
   const encryptPassword = (plainTextPassword, secretKey) => {
@@ -63,7 +69,12 @@ const StorePassword = () => {
         password:encryptPassword(formData.password, USER_SECRET_KEY),
         userID: userID,
       });
-      alert("Password saved securely 🔐");
+      Swal.fire({
+                icon: "success",
+                title: `Congrats!`,
+                text: "Your Password has been saved.",
+                showConfirmButton: true,
+              })
       setFormData({ site: '', username: '', password: '' });
     } catch (error) {
       console.error("Error saving password: ", error);

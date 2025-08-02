@@ -51,12 +51,12 @@ const Dashboard = () => {
     try {
       const bytes = CryptoJS.AES.decrypt(encryptedText, secretKey);
       const originalText = bytes.toString(CryptoJS.enc.Utf8);
-      
+
       // Check if decryption actually worked
       if (!originalText) {
         return "[Wrong Key]";
       }
-      
+
       return originalText;
     } catch (error) {
       console.error("Decryption error:", error);
@@ -132,12 +132,18 @@ const Dashboard = () => {
             {passwords.map((item) => (
               <PasswordCard
                 key={item.id}
+                id={item.id}
                 site={item.site}
                 username={item.username}
                 password={
                   showDecrypted && keySubmitted
                     ? decryptPassword(item.encryptedPassword)
                     : "••••••••"
+                }
+                onDelete={(id) =>
+                  setPasswords((prev) =>
+                    prev.filter((entry) => entry.id !== id)
+                  )
                 }
               />
             ))}

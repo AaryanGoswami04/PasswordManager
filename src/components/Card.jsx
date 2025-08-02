@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { FiCopy, FiEye, FiEyeOff } from "react-icons/fi";
-
-const Card = ({ site, username, password }) => {
+import { FiCopy, FiEye, FiEyeOff, FiTrash2 } from "react-icons/fi";
+import { doc, deleteDoc } from "firebase/firestore";
+import { db } from "../firebase/config"; // adjust the path to your firebase config
+import Swal from "sweetalert2";
+const Card = ({ site, username, password, id,onDelete }) => {
   const [copied, setCopied] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleCopy = () => {
-    // Copy the actual password (which is already decrypted from Dashboard)
     navigator.clipboard.writeText(password);
     setCopied(true);
     setTimeout(() => setCopied(false), 1200);
@@ -16,7 +17,29 @@ const Card = ({ site, username, password }) => {
     setShowPassword(!showPassword);
   };
 
-  // Check if password is actually decrypted (not just dots)
+  const handleDelete = async () => {
+  const result = await Swal.fire({
+    title: "Are you sure?",
+    text: "This will permanently delete the entry.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete it!",
+  });
+
+  if (result.isConfirmed) {
+    try {
+      await deleteDoc(doc(db, "Users", id)); // Replace "Users" if needed
+      Swal.fire("Deleted!", "The password entry has been deleted.", "success");
+      onDelete(id); // Update UI
+    } catch (error) {
+      console.error("Error deleting document:", error);
+      Swal.fire("Error", "Failed to delete the entry.", "error");
+    }
+  }
+};
+
   const isDecrypted = password && !password.includes("••••") && !password.startsWith("[");
 
   return (
@@ -33,27 +56,35 @@ const Card = ({ site, username, password }) => {
           </span>
 
           {isDecrypted && (
-            <button
-              onClick={togglePasswordVisibility}
-              className="ml-2 group p-1 rounded hover:bg-blue-100 active:bg-blue-200 transition-colors"
-              title={showPassword ? "Hide password" : "Show password"}
-            >
-              {showPassword ? (
-                <FiEyeOff className="text-blue-600 group-hover:text-blue-900" />
-              ) : (
-                <FiEye className="text-blue-600 group-hover:text-blue-900" />
-              )}
-            </button>
-          )}
+            <>
+              <button
+                onClick={togglePasswordVisibility}
+                className="ml-2 group p-1 rounded hover:bg-blue-100 active:bg-blue-200 transition-colors"
+                title={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? (
+                  <FiEyeOff className="text-blue-600 group-hover:text-blue-900" />
+                ) : (
+                  <FiEye className="text-blue-600 group-hover:text-blue-900" />
+                )}
+              </button>
 
-          {isDecrypted && (
-            <button
-              onClick={handleCopy}
-              className="group p-1 rounded hover:bg-sky-100 active:bg-sky-200 transition-colors"
-              title="Copy password"
-            >
-              <FiCopy className="text-sky-600 group-hover:text-sky-900" />
-            </button>
+              <button
+                onClick={handleCopy}
+                className="group p-1 rounded hover:bg-sky-100 active:bg-sky-200 transition-colors"
+                title="Copy password"
+              >
+                <FiCopy className="text-sky-600 group-hover:text-sky-900" />
+              </button>
+
+              <button
+                onClick={handleDelete}
+                className="group p-1 rounded hover:bg-red-100 active:bg-red-200 transition-colors"
+                title="Delete entry"
+              >
+                <FiTrash2 className="text-red-500 group-hover:text-red-800" />
+              </button>
+            </>
           )}
 
           <span

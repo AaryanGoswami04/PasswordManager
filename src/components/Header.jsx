@@ -9,8 +9,6 @@ const Navbar = () => {
     return localStorage.getItem('isAuth') || false;
   });
 
-  // A new state to hold the secret key input value
-  //const [secretKey, setSecretKey] = useState("");
 
   const handleLogin = async () => {
     try {
