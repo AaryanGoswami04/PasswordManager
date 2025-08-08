@@ -18,7 +18,7 @@ const StorePassword = () => {
     password: "",
   });
   const [userID, setUserID] = useState(() => localStorage.getItem("userID") || null);
-  const [USER_SECRET_KEY, setUSER_SECRET_KEY] = useState(() => localStorage.getItem("secretKey") || "TOPSECRET");
+  const [USER_SECRET_KEY] = useState(() => localStorage.getItem("secretKey") || "TOPSECRET");
   const [strength, setStrength] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false); // 👈 This was missing
 
