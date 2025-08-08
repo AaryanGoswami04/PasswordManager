@@ -6,7 +6,7 @@ import Navbar from './components/Header';
 import Footer from './components/Footer';
 import Dashboard from './pages/Dashboard';
 import PasswordGenerator from './pages/CreatePassword';
-
+import SecurityDashboard from './pages/SecurityDashboard';
 function App() {
   return (
     <Router>
@@ -14,8 +14,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route  path="/generate-password" element={<PasswordGenerator />} />
-        <Route path="/store-password" element={<StorePassword />} />
+        <Route path="/store-password/:id?" element={<StorePassword />} />
         <Route  path="/dashboard" element={<Dashboard />} />
+        <Route path="/security-dashboard" element={<SecurityDashboard />} />
       </Routes>
       <Footer/>
     </Router>

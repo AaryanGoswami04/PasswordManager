@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiCopy, FiKey } from "react-icons/fi";
+
 const PasswordGenerator = () => {
   const [length, setLength] = useState(12);
   const [lowerCount, setLowerCount] = useState(2);
@@ -73,7 +74,7 @@ return (
             <input
               id="password-length"
               type="number"
-              min="4"
+              min="6" // <--- Changed from 4 to 6
               max="100"
               value={length}
               onChange={e => setLength(parseInt(e.target.value))}
@@ -164,5 +165,7 @@ return (
       </div>
     </div>
   </div>
-);};
+);
+};
+
 export default PasswordGenerator;

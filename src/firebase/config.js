@@ -1,21 +1,33 @@
 import { initializeApp } from "firebase/app";
-
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+// 👇 1. IMPORT the functions you need from Firestore here
+import { getFirestore, collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAnrPvHzL9RZzXFMZLn5_ZEMOT5_pW9aqA",
-  authDomain: "vaultx-e4dd6.firebaseapp.com",
-  projectId: "vaultx-e4dd6",
-  storageBucket: "vaultx-e4dd6.firebasestorage.app",
-  messagingSenderId: "418614694446",
-  appId: "1:418614694446:web:a4abc1cb91ccaab10b05bf"
+  apiKey: "AIzaSyA4gcHm-1SLThcie_aTI2k3BF2CaewOxIU",
+  authDomain: "cybersecurity-e33bc.firebaseapp.com",
+  projectId: "cybersecurity-e33bc",
+  storageBucket: "cybersecurity-e33bc.firebasestorage.app",
+  messagingSenderId: "948318880091",
+  appId: "1:948318880091:web:07a5f48a79a50edc251a7e"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-export {collection, db, auth, provider, signInWithPopup,  addDoc };
+// 👇 2. EXPORT the functions so other files can import them
+export {
+    db,
+    auth,
+    provider,
+    signInWithPopup,
+    collection,
+    addDoc,
+    doc,
+    getDoc,
+    updateDoc
+};
